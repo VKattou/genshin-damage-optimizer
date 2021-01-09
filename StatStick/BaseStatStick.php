@@ -3,15 +3,13 @@ namespace StatStick;
 
 class BaseStatStick
 {
-	protected $flatAttack = 0;
-
-	protected $attackPercent = 0;
-	
-	protected $critRate = 0;
-	
-	protected $critDamage = 0;
-
-	protected $damageBonus = 0;
+	protected $flatAttack       = 0;
+	protected $attackPercent    = 0;
+	protected $critRate         = 0;
+	protected $critDamage       = 0;
+	protected $damageBonus      = 0;
+	protected $energyRecharge   = 0;
+	protected $elementalMastery = 0;
 	
 	public function addFlatAttack($value)
 	{
@@ -47,6 +45,20 @@ class BaseStatStick
 
 		return $this;
 	}
+
+	public function addEnergyRecharge($value)
+	{
+		$this->energyRecharge += $value;
+
+		return $this;
+	}
+
+	public function addElementalMastery($value)
+	{
+		$this->elementalMastery += $value;
+
+		return $this;
+	}
 	
 	public function __get($property)
 	{
@@ -58,5 +70,16 @@ class BaseStatStick
 		{
 			throw new Exception("Attempted to get a non-existing stat");
 		}
+	}
+
+	public function combineStatSticks(BaseStatStick $statStick)
+	{
+		$this->addFlatAttack($statStick->flatAttack)
+			->addAttackPercent($statStick->attackPercent)
+			->addCritRate($statStick->critRate)
+			->addCritDamage($statStick->critDamage)
+			->addDamageBonus($statStick->damageBonus)
+			->addEnergyRecharge($statStick->energyRecharge)
+			->addElementalMastery($statStick->elementalMastery);
 	}
 }

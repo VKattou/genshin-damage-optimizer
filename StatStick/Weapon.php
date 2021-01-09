@@ -5,18 +5,13 @@ use StatStick\BaseStatStick;
 
 class Weapon extends BaseStatStick
 {
-	private $baseAttack;
+	public $name;
+	public $baseAttack;
 
-	private $damageMultiplier;
-
-	public function __construct($baseAttack)
+	public function __construct($name, $baseAttack)
 	{
+		$this->name       = $name;
 		$this->baseAttack = $baseAttack;
-	}
-
-	public function getBaseAttack()
-	{
-		return $this->baseAttack;
 	}
 }
 
